@@ -4,13 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AnchorzUp</title>
+    <link href="/output.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>URL Shortener</h1>
-    <form action="" method="POST">
-      <label for="fullUrl">Url</label>
-      <input type="url" name="fullUrl" id="fullUrl" />
-      <button type="submit">Shorten URL</button>
-    </form>
+    <div class="flex">
+      <div class="w-[30%] h-screen bg-gray-200">
+        <img
+          src="AnchorzUp Logo_No Tagline (1).svg"
+          class="w-44 flex mx-auto mt-10"
+          alt="Logo"
+        />
+
+        <table class="w-full text-center mt-10">
+          <thead>
+            <tr>
+              <th class="p-4">My shortened URLs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% shortUrls.forEach(shortUrl => { %>
+            <tr>
+              <td>
+                <a href="<%= shortUrl.short %>"><%= shortUrl.short %></a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="w-full mx-28 mt-14 flex">
+        <div class="w-full">
+          <h1 class="text-3xl font-bold">URL Shortener</h1>
+          <form action="/shortUrls" method="POST">
+            <label for="fullUrl"></label>
+            <input
+              type="url"
+              placeholder="Paste the URL to be shortened"
+              required
+              name="fullUrl"
+              id="fullUrl"
+              class="border w-96 mt-10 p-3"
+            />
+            <br />
+            <button
+              type="submit"
+              class="border w-40 mt-6 p-3 bg-purple-500 text-white"
+            >
+              Shorten URL
+            </button>
+          </form>
+        </div>
+
+        <div class="w-full mt-20 ml-6">
+          <select name="expiration" id="expiration" class="border w-60 p-3">
+            <option value="">Add expiration date</option>
+            <option value="1m">1 minute</option>
+            <option value="5m">5 minutes</option>
+            <option value="30m">30 minutes</option>
+            <option value="1h">1 hour</option>
+            <option value="5h">5 hours</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
